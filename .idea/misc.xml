@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Documents/SLIIT/Y4S2/EAD/Labs/Assignment 1/EAD_Frontend/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Documents/SLIIT/Y4S2/EAD/Labs/Assignment 1/EAD_Frontend/app/src/main/res/layout/activity_main.xml" value="0.209375" />
+        <entry key="..\:/Documents/SLIIT/Y4S2/EAD/Labs/Assignment 1/EAD_Frontend/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Documents/SLIIT/Y4S2/EAD/Labs/Assignment 1/Telna/app/src/main/res/drawable/confirm_button.xml" value="0.1095" />
         <entry key="..\:/Documents/SLIIT/Y4S2/EAD/Labs/Assignment 1/Telna/app/src/main/res/drawable/edittext_background.xml" value="0.1095" />
         <entry key="..\:/Documents/SLIIT/Y4S2/EAD/Labs/Assignment 1/Telna/app/src/main/res/drawable/login_card.xml" value="0.1095" />

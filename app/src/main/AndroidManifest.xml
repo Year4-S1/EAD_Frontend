@@ -7,23 +7,23 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/telna_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Telna"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
+            android:name="com.telna.views.onboarding.LoginRegisterActivity"
             android:exported="false"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.Telna.NoActionBar" />
+<!--        <activity-->
+<!--            android:name=".ui.login.LoginRegisterActivity"-->
+<!--            android:exported="false"-->
+<!--            android:label="@string/title_activity_login" />-->
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="false"
-            android:label="@string/title_activity_login" />
-        <activity
-            android:name=".MainActivity"
+            android:name="com.telna.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Telna.NoActionBar">
