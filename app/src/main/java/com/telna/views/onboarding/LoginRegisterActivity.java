@@ -79,12 +79,14 @@ public class LoginRegisterActivity extends AppCompatActivity {
             tvSign.setText("Sign Up");
             llUsername.setVisibility(View.GONE);
             tvForgotPassword.setVisibility(View.VISIBLE);
+            tvConfirm.setText("Login");
         } else {
             tvTitle.setText("REGISTER!");
             tvBottomText.setText("Already have an Account? ");
             tvSign.setText("Sign In");
             llUsername.setVisibility(View.VISIBLE);
             tvForgotPassword.setVisibility(View.GONE);
+            tvConfirm.setText("Register");
         }
     }
 
