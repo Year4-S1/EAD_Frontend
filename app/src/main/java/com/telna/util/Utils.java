@@ -1,6 +1,7 @@
 package com.telna.util;
 
 import android.content.Context;
+import android.widget.Switch;
 import android.widget.Toast;
 
 public class Utils {

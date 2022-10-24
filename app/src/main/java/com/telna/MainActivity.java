@@ -3,13 +3,17 @@ package com.telna;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.Menu;
 import android.widget.ImageView;
 
+import com.telna.views.SearchActivity;
+import com.telna.views.SearchResultsActivity;
 import com.telna.views.onboarding.LoginRegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sharedPreferences = this.getSharedPreferences("s",Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getSharedPreferences("s", Context.MODE_PRIVATE);
 //        boolean isLoggedIn = sharedPreferences.getBoolean(getString(R.string.logged_state), false);
 
 //        if (isLoggedIn) {
@@ -33,12 +37,14 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-            Intent loginRegisterIntent = new Intent(MainActivity.this, LoginRegisterActivity.class);
-            loginRegisterIntent.putExtra("isLogin",true);
-            startActivity(loginRegisterIntent);
+//            Intent loginRegisterIntent = new Intent(MainActivity.this, LoginRegisterActivity.class);
+//            loginRegisterIntent.putExtra("isLogin",true);
+//            startActivity(loginRegisterIntent);
+
+                Intent searchIntent = new Intent(MainActivity.this, SearchResultsActivity.class);
+                startActivity(searchIntent);
             }
         }, 2000);
-
 
         setContentView(R.layout.activity_main);
 
