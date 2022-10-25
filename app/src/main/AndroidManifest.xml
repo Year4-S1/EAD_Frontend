@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.telna">
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Telna"
         tools:targetApi="31">
+        <activity
+            android:name=".views.InQueueActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.StationInfoActivity"
+            android:exported="false" />
         <activity
             android:name=".views.SearchResultsActivity"
             android:exported="false" />
@@ -29,10 +35,7 @@
             android:name=".views.onboarding.LoginRegisterActivity"
             android:exported="false"
             android:label="@string/title_activity_login"
-            android:theme="@style/Theme.Telna.NoActionBar" /> <!-- <activity -->
-        <!-- android:name=".ui.login.LoginRegisterActivity" -->
-        <!-- android:exported="false" -->
-        <!-- android:label="@string/title_activity_login" /> -->
+            android:theme="@style/Theme.Telna.NoActionBar" />
         <activity
             android:name="com.telna.MainActivity"
             android:exported="true"
@@ -45,5 +48,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

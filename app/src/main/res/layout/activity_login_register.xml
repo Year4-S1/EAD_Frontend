@@ -119,7 +119,7 @@
                 android:padding="5dp">
 
                 <ImageView
-                    android:layout_width="30dp"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:src="@drawable/lock" />

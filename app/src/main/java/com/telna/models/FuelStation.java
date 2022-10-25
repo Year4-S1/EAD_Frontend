@@ -5,7 +5,7 @@ import com.telna.util.enums.VehicleTypes;
 public class FuelStation {
     private String stationName;
     private String location;
-    private  FuelTypes[] fuelTypes;
+    private FuelTypes[] fuelTypes;
     private VehicleTypes[] vehicleTypes;
 
     public FuelStation(String stationName, String location, FuelTypes[] fuelTypes, VehicleTypes[] vehicleTypes) {

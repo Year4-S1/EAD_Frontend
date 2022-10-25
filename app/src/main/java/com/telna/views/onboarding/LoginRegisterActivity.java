@@ -1,17 +1,27 @@
 package com.telna.views.onboarding;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
 import com.telna.R;
+import com.telna.util.Constants;
 import com.telna.util.Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginRegisterActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
@@ -24,11 +34,17 @@ public class LoginRegisterActivity extends AppCompatActivity {
     private String username, phone, password;
     private boolean isLogin = true;
 
+    private RequestQueue queue;
+    private JsonObjectRequest request;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
         context = this;
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                .permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         isLogin = getIntent().getBooleanExtra("isLogin", true);
 
@@ -37,6 +53,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void initView() {
+
         llUsername = findViewById(R.id.ll_username);
         tvTitle = findViewById(R.id.tv_title);
         tvSign = findViewById(R.id.tv_sign);
@@ -52,9 +69,9 @@ public class LoginRegisterActivity extends AppCompatActivity {
         tvSign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isLogin){
+                if (isLogin) {
                     isLogin = false;
-                }else{
+                } else {
                     isLogin = true;
                 }
                 initComponents();
@@ -67,9 +84,15 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 phone = etPhone.getText().toString();
                 password = etPassword.getText().toString();
                 username = etUsername.getText().toString();
-                login();
+                try {
+                    login();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
+
+
     }
 
     private void initComponents() {
@@ -90,9 +113,25 @@ public class LoginRegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void login() {
+    private void login() throws JSONException {
+        RequestQueue queue = Volley.newRequestQueue(this);
         if (!phone.isEmpty() && !password.isEmpty()) {
-            //
+//            JSONObject loginDetails = new JSONObject();
+//            loginDetails.put("Phone", phone);
+//            loginDetails.put("Password", password);
+//
+//            request = new JsonObjectRequest(
+//                    Request.Method.POST,
+//                    Constants.BASEURL + "/api/user",
+//                    loginDetails,
+//                    response -> {
+//                        System.out.println("hhhhhhhhhhhhhhhhh");
+//                        Gson json = new Gson();
+////                            user = json.fromJson(String.valueOf(response), User.class);
+//                    },
+//                    error -> Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_LONG).show()
+//            );
+//            queue.add(request);
         } else {
             Utils.showToast("Please fill the fields", context);
         }
@@ -100,7 +139,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
 
     private void register() {
         if (!phone.isEmpty() && !password.isEmpty() && !username.isEmpty()) {
-            //
+
         } else {
             Utils.showToast("Please fill the fields", context);
         }

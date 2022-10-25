@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.telna.views.SearchActivity;
 import com.telna.views.SearchResultsActivity;
+import com.telna.views.StationInfoActivity;
 import com.telna.views.onboarding.LoginRegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 //            loginRegisterIntent.putExtra("isLogin",true);
 //            startActivity(loginRegisterIntent);
 
-                Intent searchIntent = new Intent(MainActivity.this, SearchResultsActivity.class);
+                Intent searchIntent = new Intent(MainActivity.this, StationInfoActivity.class);
                 startActivity(searchIntent);
             }
         }, 2000);
