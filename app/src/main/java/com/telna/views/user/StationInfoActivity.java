@@ -28,10 +28,6 @@ public class StationInfoActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        tvFuel1 = findViewById(R.id.tv_fuel1);
-        tvFuel2 = findViewById(R.id.tv_fuel2);
-        tvFuel3 = findViewById(R.id.tv_fuel3);
-        tvFuel4 = findViewById(R.id.tv_fuel4);
         tvVehicle1 = findViewById(R.id.tv_bikes);
         tvVehicle2 = findViewById(R.id.tv_tuks);
         tvVehicle3 = findViewById(R.id.tv_light);

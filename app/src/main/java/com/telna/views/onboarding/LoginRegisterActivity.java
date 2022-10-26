@@ -28,8 +28,6 @@ import com.telna.views.HomeActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
-
 public class LoginRegisterActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     private static LoginRegisterActivity context;
@@ -98,7 +96,12 @@ public class LoginRegisterActivity extends AppCompatActivity {
                 password = etPassword.getText().toString();
                 username = etUsername.getText().toString();
                 try {
-                    login();
+                    if (isLogin) {
+                        login();
+                    } else {
+                        register();
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -194,7 +197,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
                     },
                     error -> {
                         System.out.println(error.toString());
-                        Toast.makeText(getApplicationContext(), "Login Failed ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Register Failed ", Toast.LENGTH_LONG).show();
                     }
             );
             queue.add(request);

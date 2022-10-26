@@ -1,5 +1,6 @@
 package com.telna.views.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 public class SearchActivity extends AppCompatActivity {
     private Spinner ddDistrict;
     private TextView tvConfirm, tvByDistrict, tvByName;
-    private LinearLayout lvDistrict, lvName;
+    private LinearLayout lvDistrict, lvName, lvFindAll;
     private EditText etStation;
     private FuelTypes[] fuelTypes;
     private ArrayList<String> districts = new ArrayList<String>();
@@ -53,6 +54,7 @@ public class SearchActivity extends AppCompatActivity {
         tvByName = findViewById(R.id.tv_search_name);
         lvDistrict = findViewById(R.id.lv_district);
         lvName = findViewById(R.id.lv_name);
+        lvFindAll = findViewById(R.id.ll_findAll);
 
         setupDropdowns();
         searchBy();
@@ -81,6 +83,15 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View view) {
                 isSearchByDistrict = false;
                 searchBy();
+            }
+        });
+
+        lvFindAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent searchResult = new Intent(SearchActivity.this, SearchResultsActivity.class);
+                startActivity(searchResult);
+                finish();
             }
         });
     }

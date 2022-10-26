@@ -2,7 +2,9 @@ package com.telna.views;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,11 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.telna.R;
 import com.telna.models.User;
+import com.telna.views.onboarding.LoginRegisterActivity;
 import com.telna.views.user.SearchActivity;
 
 
 public class HomeActivity extends AppCompatActivity {
-    private TextView tvUserName;
+    private TextView tvUserName, tvLogout;
     private LinearLayout search;
     private ImageView logo;
     private User user;
@@ -37,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         tvUserName = findViewById(R.id.tv_user_name);
         logo = findViewById(R.id.logo);
         search = findViewById(R.id.lv_search);
+        tvLogout = findViewById(R.id.tv_logout);
 
         tvUserName.setText(user.getName());
 
@@ -53,6 +57,22 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent homeIntent = new Intent(HomeActivity.this, SearchActivity.class);
+                startActivity(homeIntent);
+                finish();
+            }
+        });
+        tvLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                SharedPreferences prefs = getSharedPreferences("telna", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putBoolean("isLogin", false);
+                editor.putString("user", null);
+                editor.apply();
+
+                Intent homeIntent = new Intent(HomeActivity.this, LoginRegisterActivity.class);
                 startActivity(homeIntent);
                 finish();
             }

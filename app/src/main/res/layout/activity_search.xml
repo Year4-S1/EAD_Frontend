@@ -176,8 +176,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/ll_findAll"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/circle"
             android:orientation="vertical">
 
             <ImageView
@@ -193,9 +197,9 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="Find"
+                android:text="Find all"
                 android:textColor="#575757"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
