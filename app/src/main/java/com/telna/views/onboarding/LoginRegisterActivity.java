@@ -127,43 +127,77 @@ public class LoginRegisterActivity extends AppCompatActivity {
     private void login() throws JSONException {
         RequestQueue queue = Volley.newRequestQueue(this);
         if (!phone.isEmpty() && !password.isEmpty()) {
-        JSONObject loginDetails = new JSONObject();
-        loginDetails.put("Phone", phone);
-        loginDetails.put("Password", password);
+            JSONObject loginDetails = new JSONObject();
+            loginDetails.put("Phone", phone);
+            loginDetails.put("Password", password);
 
-        request = new JsonObjectRequest(
-                Request.Method.POST,
-                Constants.BASEURL + "/api/user/login",
-                loginDetails,
-                response -> {
-                    Toast.makeText(getApplicationContext(), "Login Successful ", Toast.LENGTH_LONG).show();
+            request = new JsonObjectRequest(
+                    Request.Method.POST,
+                    Constants.BASEURL + "/api/user/login",
+                    loginDetails,
+                    response -> {
+                        Toast.makeText(getApplicationContext(), "Login Successful ", Toast.LENGTH_LONG).show();
 
-                    User user = json.fromJson(String.valueOf(response), User.class);
+                        User user = json.fromJson(String.valueOf(response), User.class);
+                        String userJson = json.toJson(user);
 
-                    SharedPreferences prefs = getSharedPreferences("telna", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = prefs.edit();
-                    editor.putBoolean("isLogin", true);
-                    editor.putString("user", String.valueOf(response));
-                    editor.apply();
+                        SharedPreferences prefs = getSharedPreferences("telna", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putBoolean("isLogin", true);
+                        editor.putString("user", userJson);
+                        editor.apply();
 
-                    Intent homeIntent = new Intent(LoginRegisterActivity.this, HomeActivity.class);
-                    homeIntent.putExtra("user", (Serializable) user);
-                    startActivity(homeIntent);
-                },
-                error -> {
-                    System.out.println(error.toString());
-                    Toast.makeText(getApplicationContext(), "Login Failed ", Toast.LENGTH_LONG).show();
-                }
-        );
-        queue.add(request);
+                        Intent homeIntent = new Intent(LoginRegisterActivity.this, HomeActivity.class);
+                        homeIntent.putExtra("user", userJson);
+                        startActivity(homeIntent);
+                    },
+                    error -> {
+                        System.out.println(error.toString());
+                        Toast.makeText(getApplicationContext(), "Login Failed ", Toast.LENGTH_LONG).show();
+                    }
+            );
+            queue.add(request);
         } else {
             Utils.showToast("Please fill the fields", context);
         }
     }
 
-    private void register() {
+    private void register() throws JSONException {
+        RequestQueue queue = Volley.newRequestQueue(this);
         if (!phone.isEmpty() && !password.isEmpty() && !username.isEmpty()) {
+            JSONObject registerDetails = new JSONObject();
+            registerDetails.put("Name", etUsername.getText());
+            registerDetails.put("Phone", etPhone.getText());
+            registerDetails.put("Password", etPassword.getText());
+            registerDetails.put("UserType", "Customer");
+            registerDetails.put("LoginStatus", false);
 
+            request = new JsonObjectRequest(
+                    Request.Method.POST,
+                    Constants.BASEURL + "/api/user/create",
+                    registerDetails,
+                    response -> {
+                        Toast.makeText(getApplicationContext(), "Login Successful ", Toast.LENGTH_LONG).show();
+
+                        User user = json.fromJson(String.valueOf(response), User.class);
+                        String userJson = json.toJson(user);
+
+                        SharedPreferences prefs = getSharedPreferences("telna", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putBoolean("isLogin", true);
+                        editor.putString("user", userJson);
+                        editor.apply();
+
+                        Intent homeIntent = new Intent(LoginRegisterActivity.this, HomeActivity.class);
+                        homeIntent.putExtra("user", userJson);
+                        startActivity(homeIntent);
+                    },
+                    error -> {
+                        System.out.println(error.toString());
+                        Toast.makeText(getApplicationContext(), "Login Failed ", Toast.LENGTH_LONG).show();
+                    }
+            );
+            queue.add(request);
         } else {
             Utils.showToast("Please fill the fields", context);
         }

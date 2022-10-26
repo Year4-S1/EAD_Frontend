@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             User user = json.fromJson(userModel, User.class);
 
             Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
-            homeIntent.putExtra("user", (Serializable) user);
+            homeIntent.putExtra("user", userModel);
             startActivity(homeIntent);
             finish();
             return;

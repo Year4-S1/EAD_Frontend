@@ -32,9 +32,9 @@ public class SearchResultsActivity extends AppCompatActivity {
         stationsLoader.setAdapter(stationsAdapter);
         stationsLoader.setLayoutManager(new LinearLayoutManager(this));
 
-        fuelStations.add(new FuelStation("name", "loca1", new FuelTypes[]{FuelTypes.PETROL92, FuelTypes.PETROL95, FuelTypes.DIESEL}, new VehicleTypes[]{VehicleTypes.BIKES, VehicleTypes.LIGHT}));
-        fuelStations.add(new FuelStation("name1", "loca2", new FuelTypes[]{FuelTypes.PETROL92, FuelTypes.PETROL95}, new VehicleTypes[]{VehicleTypes.BIKES, VehicleTypes.LIGHT}));
-        fuelStations.add(new FuelStation("name2", "loca3", new FuelTypes[]{FuelTypes.PETROL92, FuelTypes.PETROL95, FuelTypes.DIESEL, FuelTypes.SUPERDIESEL}, new VehicleTypes[]{VehicleTypes.BIKES, VehicleTypes.LIGHT}));
+//        fuelStations.add(new FuelStation("name", "loca1", new FuelTypes[]{FuelTypes.PETROL92, FuelTypes.PETROL95, FuelTypes.DIESEL}, new VehicleTypes[]{VehicleTypes.BIKES, VehicleTypes.LIGHT}));
+//        fuelStations.add(new FuelStation("name1", "loca2", new FuelTypes[]{FuelTypes.PETROL92, FuelTypes.PETROL95}, new VehicleTypes[]{VehicleTypes.BIKES, VehicleTypes.LIGHT}));
+//        fuelStations.add(new FuelStation("name2", "loca3", new FuelTypes[]{FuelTypes.PETROL92, FuelTypes.PETROL95, FuelTypes.DIESEL, FuelTypes.SUPERDIESEL}, new VehicleTypes[]{VehicleTypes.BIKES, VehicleTypes.LIGHT}));
 
     }
 }
