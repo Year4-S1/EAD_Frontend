@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.telna.R;
@@ -75,6 +76,12 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.ViewHo
                 holder.getVehicle4().setVisibility(View.VISIBLE);
             }
         }
+        holder.getBody().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Clicked card");
+            }
+        });
     }
 
     @Override
@@ -87,6 +94,7 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.ViewHo
         private TextView stationLocation;
         private TextView fuelType1, fuelType2, fuelType3, fuelType4;
         private TextView vehicle1, vehicle2, vehicle3, vehicle4;
+        private ConstraintLayout body;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -102,6 +110,8 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.ViewHo
             vehicle2 = (TextView) itemView.findViewById(R.id.tv_tuks);
             vehicle3 = (TextView) itemView.findViewById(R.id.tv_light);
             vehicle4 = (TextView) itemView.findViewById(R.id.tv_heavy);
+
+            body = (ConstraintLayout) itemView.findViewById(R.id.bodyLayout);
         }
 
         public TextView getStationTitle() {
@@ -142,6 +152,10 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.ViewHo
 
         public TextView getVehicle4() {
             return vehicle4;
+        }
+
+        public ConstraintLayout getBody() {
+            return body;
         }
     }
 }

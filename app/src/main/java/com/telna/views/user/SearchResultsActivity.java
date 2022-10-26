@@ -1,4 +1,4 @@
-package com.telna.views;
+package com.telna.views.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;

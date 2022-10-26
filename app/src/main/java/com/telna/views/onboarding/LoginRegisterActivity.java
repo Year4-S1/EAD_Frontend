@@ -1,6 +1,9 @@
 package com.telna.views.onboarding;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -17,18 +20,22 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.telna.R;
+import com.telna.models.User;
 import com.telna.util.Constants;
 import com.telna.util.Utils;
+import com.telna.views.HomeActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.Serializable;
 
 public class LoginRegisterActivity extends AppCompatActivity {
     @SuppressLint("StaticFieldLeak")
     private static LoginRegisterActivity context;
 
     private LinearLayout llUsername;
-    private TextView tvSign, tvConfirm, tvTitle, tvBottomText, tvForgotPassword;
+    private TextView tvSign, tvConfirm, tvTitle, tvBottomText;
     private EditText etUsername, etPhone, etPassword;
 
     private String username, phone, password;
@@ -36,6 +43,8 @@ public class LoginRegisterActivity extends AppCompatActivity {
 
     private RequestQueue queue;
     private JsonObjectRequest request;
+
+    Gson json = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +67,17 @@ public class LoginRegisterActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.tv_title);
         tvSign = findViewById(R.id.tv_sign);
         tvBottomText = findViewById(R.id.tv_bottomText);
-        tvForgotPassword = findViewById(R.id.tv_forgotPassword);
         etUsername = findViewById(R.id.et_username);
         etPhone = findViewById(R.id.et_phone_num);
         etPassword = findViewById(R.id.et_password);
         tvConfirm = findViewById(R.id.tv_confirm);
 
         initComponents();
+
+        //============ temp ================
+        etPhone.setText("0711111111");
+        etPassword.setText("cust1");
+        //==================================
 
         tvSign.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,14 +114,12 @@ public class LoginRegisterActivity extends AppCompatActivity {
             tvBottomText.setText("Do not have a profile?");
             tvSign.setText("Sign Up");
             llUsername.setVisibility(View.GONE);
-            tvForgotPassword.setVisibility(View.VISIBLE);
             tvConfirm.setText("Login");
         } else {
             tvTitle.setText("REGISTER!");
             tvBottomText.setText("Already have an Account? ");
             tvSign.setText("Sign In");
             llUsername.setVisibility(View.VISIBLE);
-            tvForgotPassword.setVisibility(View.GONE);
             tvConfirm.setText("Register");
         }
     }
@@ -116,22 +127,35 @@ public class LoginRegisterActivity extends AppCompatActivity {
     private void login() throws JSONException {
         RequestQueue queue = Volley.newRequestQueue(this);
         if (!phone.isEmpty() && !password.isEmpty()) {
-//            JSONObject loginDetails = new JSONObject();
-//            loginDetails.put("Phone", phone);
-//            loginDetails.put("Password", password);
-//
-//            request = new JsonObjectRequest(
-//                    Request.Method.POST,
-//                    Constants.BASEURL + "/api/user",
-//                    loginDetails,
-//                    response -> {
-//                        System.out.println("hhhhhhhhhhhhhhhhh");
-//                        Gson json = new Gson();
-////                            user = json.fromJson(String.valueOf(response), User.class);
-//                    },
-//                    error -> Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_LONG).show()
-//            );
-//            queue.add(request);
+        JSONObject loginDetails = new JSONObject();
+        loginDetails.put("Phone", phone);
+        loginDetails.put("Password", password);
+
+        request = new JsonObjectRequest(
+                Request.Method.POST,
+                Constants.BASEURL + "/api/user/login",
+                loginDetails,
+                response -> {
+                    Toast.makeText(getApplicationContext(), "Login Successful ", Toast.LENGTH_LONG).show();
+
+                    User user = json.fromJson(String.valueOf(response), User.class);
+
+                    SharedPreferences prefs = getSharedPreferences("telna", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putBoolean("isLogin", true);
+                    editor.putString("user", String.valueOf(response));
+                    editor.apply();
+
+                    Intent homeIntent = new Intent(LoginRegisterActivity.this, HomeActivity.class);
+                    homeIntent.putExtra("user", (Serializable) user);
+                    startActivity(homeIntent);
+                },
+                error -> {
+                    System.out.println(error.toString());
+                    Toast.makeText(getApplicationContext(), "Login Failed ", Toast.LENGTH_LONG).show();
+                }
+        );
+        queue.add(request);
         } else {
             Utils.showToast("Please fill the fields", context);
         }

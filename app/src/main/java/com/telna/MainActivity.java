@@ -2,48 +2,55 @@ package com.telna;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.Menu;
 import android.widget.ImageView;
 
-import com.telna.views.SearchActivity;
-import com.telna.views.SearchResultsActivity;
-import com.telna.views.StationInfoActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.gson.Gson;
+import com.telna.models.User;
+import com.telna.views.HomeActivity;
 import com.telna.views.onboarding.LoginRegisterActivity;
+
+import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity {
 
     private ImageView image;
+    private boolean isLoggedIn;
+    private String userModel;
+
+    Gson json = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sharedPreferences = this.getSharedPreferences("s", Context.MODE_PRIVATE);
-//        boolean isLoggedIn = sharedPreferences.getBoolean(getString(R.string.logged_state), false);
+        SharedPreferences prefs = getSharedPreferences("telna", Context.MODE_PRIVATE);
+        isLoggedIn = prefs.getBoolean("isLogin", false);
+        userModel = prefs.getString("user", "");
 
-//        if (isLoggedIn) {
-//            Intent registerIntent = new Intent(MainActivity.this, DashboardActivity.class);
-//            startActivity(registerIntent);
-//            finish();
-//            return;
-//        }
+        if (isLoggedIn) {
+            User user = json.fromJson(userModel, User.class);
+
+            Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
+            homeIntent.putExtra("user", (Serializable) user);
+            startActivity(homeIntent);
+            finish();
+            return;
+        }
+
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-//            Intent loginRegisterIntent = new Intent(MainActivity.this, LoginRegisterActivity.class);
-//            loginRegisterIntent.putExtra("isLogin",true);
-//            startActivity(loginRegisterIntent);
-
-                Intent searchIntent = new Intent(MainActivity.this, StationInfoActivity.class);
-                startActivity(searchIntent);
+                Intent loginRegisterIntent = new Intent(MainActivity.this, LoginRegisterActivity.class);
+                loginRegisterIntent.putExtra("isLogin", true);
+                startActivity(loginRegisterIntent);
             }
         }, 2000);
 

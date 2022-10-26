@@ -8,7 +8,7 @@ public class Constants {
 
     static {
         try {
-            BASEURL = new URL("https://localhost:44391");
+            BASEURL = new URL("http://10.0.2.2:5000");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

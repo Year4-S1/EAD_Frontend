@@ -2,31 +2,39 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.telna">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:networkSecurityConfig="@xml/network_security_config"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/telna_logo"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Telna"
         tools:targetApi="31">
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
         <activity
-            android:name=".views.InQueueActivity"
+            android:name=".views.owner.UpdateInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".views.StationInfoActivity"
+            android:name=".views.user.InQueueActivity"
             android:exported="false" />
         <activity
-            android:name=".views.SearchResultsActivity"
+            android:name=".views.user.StationInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".views.user.SearchResultsActivity"
             android:exported="false" />
         <activity
             android:name=".views.components.FillingStationInfoCardActivity"
             android:exported="false" />
         <activity
-            android:name=".views.SearchActivity"
+            android:name=".views.user.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".views.HomeActivity"
@@ -48,4 +56,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

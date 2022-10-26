@@ -1,4 +1,4 @@
-package com.telna.views;
+package com.telna.views.user;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
