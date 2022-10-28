@@ -92,6 +92,8 @@ public class LoginRegisterActivity extends AppCompatActivity {
         tvConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tvConfirm.setText("Please wait");
+
                 phone = etPhone.getText().toString();
                 password = etPassword.getText().toString();
                 username = etUsername.getText().toString();
@@ -142,6 +144,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Login Successful ", Toast.LENGTH_LONG).show();
 
                         User user = json.fromJson(String.valueOf(response), User.class);
+
                         String userJson = json.toJson(user);
 
                         SharedPreferences prefs = getSharedPreferences("telna", Context.MODE_PRIVATE);
@@ -155,6 +158,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
                         startActivity(homeIntent);
                     },
                     error -> {
+                        tvConfirm.setText("Login");
                         System.out.println(error.toString());
                         Toast.makeText(getApplicationContext(), "Login Failed ", Toast.LENGTH_LONG).show();
                     }
@@ -169,18 +173,17 @@ public class LoginRegisterActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         if (!phone.isEmpty() && !password.isEmpty() && !username.isEmpty()) {
             JSONObject registerDetails = new JSONObject();
-            registerDetails.put("Name", etUsername.getText());
-            registerDetails.put("Phone", etPhone.getText());
-            registerDetails.put("Password", etPassword.getText());
+            registerDetails.put("Name", etUsername.getText().toString());
+            registerDetails.put("Phone", etPhone.getText().toString());
+            registerDetails.put("Password", etPassword.getText().toString());
             registerDetails.put("UserType", "Customer");
-            registerDetails.put("LoginStatus", false);
 
             request = new JsonObjectRequest(
                     Request.Method.POST,
                     Constants.BASEURL + "/api/user/create",
                     registerDetails,
                     response -> {
-                        Toast.makeText(getApplicationContext(), "Login Successful ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Register Successful ", Toast.LENGTH_LONG).show();
 
                         User user = json.fromJson(String.valueOf(response), User.class);
                         String userJson = json.toJson(user);
@@ -196,6 +199,7 @@ public class LoginRegisterActivity extends AppCompatActivity {
                         startActivity(homeIntent);
                     },
                     error -> {
+                        tvConfirm.setText("Register");
                         System.out.println(error.toString());
                         Toast.makeText(getApplicationContext(), "Register Failed ", Toast.LENGTH_LONG).show();
                     }

@@ -1,5 +1,6 @@
 package com.telna.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.telna.R;
 import com.telna.models.FuelStation;
+import com.telna.views.HomeActivity;
+import com.telna.views.onboarding.LoginRegisterActivity;
+import com.telna.views.user.SearchResultsActivity;
 
 import java.util.ArrayList;
 
@@ -34,8 +38,6 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FuelStation station = fuelStations.get(position);
 
-        System.out.println(station.getStationName());
-
         holder.getStationTitle().setText(station.getStationName());
         holder.getStationLocation().setText(station.getLocation());
         holder.getQuantity().setText(String.valueOf(station.getAmountOfFuel()));
@@ -43,6 +45,8 @@ public class StationsAdapter extends RecyclerView.Adapter<StationsAdapter.ViewHo
         holder.getBody().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                               
+
                 System.out.println("Clicked card");
             }
         });

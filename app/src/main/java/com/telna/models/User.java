@@ -1,77 +1,67 @@
 package com.telna.models;
 
 public class User {
-    private IdDetails id;
-    private String userId;
-    private String name;
-    private String phone;
-    private String password;
-    private String userType;
-    private Boolean loginStatus;
+    private String Id;
+    private String Name;
+    private String Phone;
+    private String Password;
+    private String UserType;
+    private Boolean LoginStatus;
 
-    public User(IdDetails id, String userId, String name, String phone, String password, String userType, Boolean loginStatus) {
-        this.id = id;
-        this.userId = userId;
-        this.name = name;
-        this.phone = phone;
-        this.password = password;
-        this.userType = userType;
-        this.loginStatus = loginStatus;
+    public User(String id, String name, String phone, String password, String userType, Boolean loginStatus) {
+        Id = id;
+        Name = name;
+        Phone = phone;
+        Password = password;
+        UserType = userType;
+        LoginStatus = loginStatus;
     }
 
-    public IdDetails getId() {
-        return id;
+    public String getId() {
+        return Id;
     }
 
-    public void setId(IdDetails id) {
-        this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        Id = id;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
     }
 
     public String getPhone() {
-        return phone;
+        return Phone;
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        Phone = phone;
     }
 
     public String getPassword() {
-        return password;
+        return Password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        Password = password;
     }
 
     public String getUserType() {
-        return userType;
+        return UserType;
     }
 
     public void setUserType(String userType) {
-        this.userType = userType;
+        UserType = userType;
     }
 
     public Boolean getLoginStatus() {
-        return loginStatus;
+        return LoginStatus;
     }
 
     public void setLoginStatus(Boolean loginStatus) {
-        this.loginStatus = loginStatus;
+        LoginStatus = loginStatus;
     }
 }

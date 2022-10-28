@@ -4,97 +4,107 @@ import com.telna.util.enums.FuelTypes;
 import com.telna.util.enums.VehicleTypes;
 
 public class FuelStation {
-    private IdDetails id;
-    private String stationID;
-    private String stationName;
-    private String location;
-    private String district;
-    private FuelTypes[] fuelTypes;
-    private VehicleTypes[] vehicleTypes;
-    private boolean availability;
-    private int amountOfFuel;
+    private String Id;
+    private String StationID;
+    private String StationName;
+    private String StationOwnerID;
+    private String Location;
+    private String District;
+    private FuelTypes[] FuelTypes;
+    private VehicleTypes[] VehicleTypes;
+    private boolean Availability;
+    private int AmountOfFuel;
 
-    public FuelStation(IdDetails id, String stationID, String stationName, String location, String district, FuelTypes[] fuelTypes, VehicleTypes[] vehicleTypes, boolean availability, int amountOfFuel) {
-        this.id = id;
-        this.stationID = stationID;
-        this.stationName = stationName;
-        this.location = location;
-        this.district = district;
-        this.fuelTypes = fuelTypes;
-        this.vehicleTypes = vehicleTypes;
-        this.availability = availability;
-        this.amountOfFuel = amountOfFuel;
+    public FuelStation(String id, String stationID, String stationName, String stationOwnerID, String location, String district, com.telna.util.enums.FuelTypes[] fuelTypes, com.telna.util.enums.VehicleTypes[] vehicleTypes, boolean availability, int amountOfFuel) {
+        Id = id;
+        StationID = stationID;
+        StationName = stationName;
+        StationOwnerID = stationOwnerID;
+        Location = location;
+        District = district;
+        FuelTypes = fuelTypes;
+        VehicleTypes = vehicleTypes;
+        Availability = availability;
+        AmountOfFuel = amountOfFuel;
     }
 
-    public IdDetails getId() {
-        return id;
+    public String getId() {
+        return Id;
     }
 
-    public void setId(IdDetails id) {
-        this.id = id;
+    public void setId(String id) {
+        Id = id;
     }
 
     public String getStationID() {
-        return stationID;
+        return StationID;
     }
 
     public void setStationID(String stationID) {
-        this.stationID = stationID;
+        StationID = stationID;
     }
 
     public String getStationName() {
-        return stationName;
+        return StationName;
     }
 
     public void setStationName(String stationName) {
-        this.stationName = stationName;
+        StationName = stationName;
+    }
+
+    public String getStationOwnerID() {
+        return StationOwnerID;
+    }
+
+    public void setStationOwnerID(String stationOwnerID) {
+        StationOwnerID = stationOwnerID;
     }
 
     public String getLocation() {
-        return location;
+        return Location;
     }
 
     public void setLocation(String location) {
-        this.location = location;
+        Location = location;
     }
 
     public String getDistrict() {
-        return district;
+        return District;
     }
 
     public void setDistrict(String district) {
-        this.district = district;
+        District = district;
     }
 
-    public FuelTypes[] getFuelTypes() {
-        return fuelTypes;
+    public com.telna.util.enums.FuelTypes[] getFuelTypes() {
+        return FuelTypes;
     }
 
-    public void setFuelTypes(FuelTypes[] fuelTypes) {
-        this.fuelTypes = fuelTypes;
+    public void setFuelTypes(com.telna.util.enums.FuelTypes[] fuelTypes) {
+        FuelTypes = fuelTypes;
     }
 
-    public VehicleTypes[] getVehicleTypes() {
-        return vehicleTypes;
+    public com.telna.util.enums.VehicleTypes[] getVehicleTypes() {
+        return VehicleTypes;
     }
 
-    public void setVehicleTypes(VehicleTypes[] vehicleTypes) {
-        this.vehicleTypes = vehicleTypes;
+    public void setVehicleTypes(com.telna.util.enums.VehicleTypes[] vehicleTypes) {
+        VehicleTypes = vehicleTypes;
     }
 
     public boolean isAvailability() {
-        return availability;
+        return Availability;
     }
 
     public void setAvailability(boolean availability) {
-        this.availability = availability;
+        Availability = availability;
     }
 
     public int getAmountOfFuel() {
-        return amountOfFuel;
+        return AmountOfFuel;
     }
 
     public void setAmountOfFuel(int amountOfFuel) {
-        this.amountOfFuel = amountOfFuel;
+        AmountOfFuel = amountOfFuel;
     }
 }

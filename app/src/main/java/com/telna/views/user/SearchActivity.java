@@ -8,19 +8,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 import com.telna.R;
-import com.telna.models.FuelStation;
-import com.telna.util.Constants;
 import com.telna.util.enums.FuelTypes;
 
 import org.json.JSONException;
@@ -34,9 +26,7 @@ public class SearchActivity extends AppCompatActivity {
     private EditText etStation;
     private FuelTypes[] fuelTypes;
     private ArrayList<String> districts = new ArrayList<String>();
-    private JsonObjectRequest request;
     private boolean isSearchByDistrict = true;
-    Gson json = new Gson();
 
 
     @Override
@@ -62,11 +52,20 @@ public class SearchActivity extends AppCompatActivity {
         tvConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    search();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+
+                String param;
+
+                if (isSearchByDistrict) {
+                    param = ddDistrict.getSelectedItem().toString();
+                } else {
+                    param = etStation.getText().toString();
                 }
+
+                Intent searchResult = new Intent(SearchActivity.this, SearchResultsActivity.class);
+                searchResult.putExtra("searchParam", param);
+                searchResult.putExtra("type", "search");
+                startActivity(searchResult);
+                finish();
             }
         });
 
@@ -90,42 +89,11 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent searchResult = new Intent(SearchActivity.this, SearchResultsActivity.class);
+                searchResult.putExtra("type", "all");
                 startActivity(searchResult);
                 finish();
             }
         });
-    }
-
-    private void search() throws JSONException {
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String param;
-
-        if (isSearchByDistrict) {
-            param = ddDistrict.getSelectedItem().toString();
-        } else {
-            param = etStation.getText().toString();
-        }
-
-        request = new JsonObjectRequest(
-                Request.Method.GET,
-                Constants.BASEURL + "/api/station/search/" + param,
-                null,
-                response -> {
-                    FuelStation fuelStation = json.fromJson(String.valueOf(response), FuelStation.class);
-                    String fuelStationJson = json.toJson(fuelStation);
-
-                    System.out.println(fuelStationJson);
-
-//                    Intent homeIntent = new Intent(LoginRegisterActivity.this, HomeActivity.class);
-//                    homeIntent.putExtra("user", userJson);
-//                    startActivity(homeIntent);
-                },
-                error -> {
-                    System.out.println(error);
-                    Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
-                }
-        );
-        queue.add(request);
     }
 
     private void searchBy() {
@@ -144,13 +112,11 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-
     private void setupDropdowns() {
         makeDistricts();
         ArrayAdapter districtAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, districts);
         ddDistrict.setAdapter(districtAdapter);
     }
-
 
     public void makeDistricts() {
         districts.add("Colombo");
